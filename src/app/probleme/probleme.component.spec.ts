@@ -51,4 +51,12 @@ describe('ProblemeComponent', () => {
     errors = zone.errors || {};
     expect(errors['required']).toBeTruthy();
   });
+
+  it ('Zone PRÉNOM invalide avec 1 caractère', () => {
+    let errors = {};
+    let zone = component.problemeForm.get('prenomUtilisateur');
+    zone.setValue('a'.repeat(1));
+    errors = zone.errors || {};
+    expect(errors['minlength']).toBeTruthy();
+  });
 });
