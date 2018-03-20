@@ -59,4 +59,10 @@ describe('ProblemeComponent', () => {
     errors = zone.errors || {};
     expect(errors['minlength']).toBeTruthy();
   });
+
+  it ('Zone PRÉNOM valide avec 50 espaces', () => {
+    let zone = component.problemeForm.controls['prenomUtilisateur'];
+    zone.setValue(' '.repeat(50));
+    expect(zone.valid).toBeTruthy();
+  });
 });
