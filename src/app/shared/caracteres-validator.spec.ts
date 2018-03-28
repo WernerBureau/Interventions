@@ -53,4 +53,11 @@ describe('longueurMinimum Validator', () => {
         expect(result['sansEspaces']).toBe(true);
     });   
 
+    it('une expression avec 5 espaces, 5 caractères et 5 espces est valide.', () => {
+        let control = {value: "     J'aime angular     "};
+        let validator = VerifierCaracteresValidator.longueurMinimum(3);
+        let result = validator(control as AbstractControl);
+        expect(result['sansEspaces']).toBe(true);
+    });   
+
 });
