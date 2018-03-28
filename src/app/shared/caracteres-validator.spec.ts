@@ -1,9 +1,18 @@
 import { VerifierCaracteresValidator } from "./caracteres-validator";
+import { AbstractControl } from "@angular/forms";
 
-describe('Caracteres Validator', () => {
-    it('plage pour la valeur valide limite 1', () => {
-        let validator = VerifierCaracteresValidator.plage();
-        let result = validator(null);
-        expect(result['plage']).toBe(true);
+describe('sansEspaces Validator', () => {
+    it('une chaine vide est invalide', () => {
+        let control = {value: ""};
+        let validator = VerifierCaracteresValidator.sansEspaces();
+        let result = validator(control as AbstractControl);
+        expect(result['sansEspaces']).toBe(false);
+    });    
+    
+    it('une chaine avec 10 espaces est invalide', () => {
+        let control = {value: "          "};
+        let validator = VerifierCaracteresValidator.sansEspaces();
+        let result = validator(control as AbstractControl);
+        expect(result['sansEspaces']).toBe(false);
     });
 });
