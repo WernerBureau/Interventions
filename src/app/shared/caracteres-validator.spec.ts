@@ -10,7 +10,7 @@ describe('sansEspaces Validator', () => {
     });    
     
     it('une chaine avec 10 espaces est invalide', () => {
-        let control = {value: "          "};
+        let control = {value: ' '.repeat(10)};
         let validator = VerifierCaracteresValidator.sansEspaces();
         let result = validator(control as AbstractControl);
         expect(result['sansEspaces']).toBe(false);
@@ -29,4 +29,21 @@ describe('sansEspaces Validator', () => {
         let result = validator(control as AbstractControl);
         expect(result['sansEspaces']).toBe(true);
     });
+});
+
+describe('longueurMinimum Validator', () => {
+    it('une expression avec 1 espaces et 2 caractères est invalide.', () => {
+        let control = {value: " xx"};
+        let validator = VerifierCaracteresValidator.longueurMinimum(3);
+        let result = validator(control as AbstractControl);
+        expect(result['sansEspaces']).toBe(false);
+    });
+
+    it('une expression avec 2 espaces et 1 caractères est invalide.', () => {
+        let control = {value: "  x"};
+        let validator = VerifierCaracteresValidator.longueurMinimum(3);
+        let result = validator(control as AbstractControl);
+        expect(result['sansEspaces']).toBe(false);
+    });   
+
 });

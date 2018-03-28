@@ -6,8 +6,13 @@ export class VerifierCaracteresValidator {
             if (c.value.trim().length > 0 ) {
                 return {'sansEspaces': true};
             }
-            if (c.value.trim().length == 0) {
-                return {'sansEspaces': false};
+            return {'sansEspaces': false};
+        };
+    }    
+    static longueurMinimum(min: number): ValidatorFn {
+        return (c: AbstractControl): {[key: string]: boolean } | null => {
+            if (c.value.trim().length >= min ) {
+                return {'sansEspaces': true};
             }
             return {'sansEspaces': false};
         };
