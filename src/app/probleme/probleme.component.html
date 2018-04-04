@@ -21,26 +21,32 @@
             type="text"
             placeholder="Votre prénom ici (obligatoire)"
             formControlName="prenomUtilisateur"
-            [ngClass]="{'is-invalid': (problemeForm.get('prenomUtilisateur').touched ||
-            problemeForm.get('prenomUtilisateur').dirty) &&
-            !problemeForm.get('prenomUtilisateur').valid,
-            'is-valid': (problemeForm.get('prenomUtilisateur').touched ||
-            problemeForm.get('prenomUtilisateur').dirty) &&
-            problemeForm.get('prenomUtilisateur').valid }"
-            />
+            [ngClass]="{
+            'is-valid': 
+                  (problemeForm.get('prenomUtilisateur').touched ||
+                  problemeForm.get('prenomUtilisateur').dirty) &&
+                  problemeForm.get('prenomUtilisateur').errors.longueurMinimum,
+
+            'is-invalid': 
+                  (problemeForm.get('prenomUtilisateur').touched ||
+                  problemeForm.get('prenomUtilisateur').dirty) &&
+                  !problemeForm.get('prenomUtilisateur').errors.longueurMinimum
+            }"/>
+
             <span class= "form-text" *ngIf="(problemeForm.get('prenomUtilisateur').touched ||
               problemeForm.get('prenomUtilisateur').dirty) &&
               problemeForm.get('prenomUtilisateur').errors">
-              <span *ngIf="problemeForm.get('prenomUtilisateur').errors.minlength">
+              <span *ngIf="!problemeForm.get('prenomUtilisateur').errors.longueurMinimum">
                 <small class="text-muted">
                 Veuillez entrer plus de caractères.
                 </small>
               </span>
-              <span *ngIf="problemeForm.get('prenomUtilisateur').errors.required">
-                  <small class="text-muted">
-                  Merci de saisir votre prénom.
-                  </small>
-                </span>
+
+              <span *ngIf="!problemeForm.get('prenomUtilisateur').errors.sansEspaces">
+                <small class="text-muted">
+                Merci de saisir votre prénom.
+                </small>
+              </span>
             </span>
           </div>
         </div> 
@@ -48,5 +54,4 @@
     </div>
   </div>
 </div>
-
 </div>
