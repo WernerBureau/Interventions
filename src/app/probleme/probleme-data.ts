@@ -18,7 +18,7 @@ export class ProblemeData implements InMemoryDbService {
             },
             {
                 'id': 4,
-                'descriptionTypeProbleme': "Problème avecun logiciel"
+                'descriptionTypeProbleme': "Problème avec un logiciel"
             },
             {
                 'id': 5,

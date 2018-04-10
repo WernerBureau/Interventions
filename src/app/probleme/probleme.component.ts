@@ -20,11 +20,12 @@ export class ProblemeComponent implements OnInit {
   ngOnInit() {
     this.problemeForm = this.fb.group({
       prenomUtilisateur: ['',[VerifierCaracteresValidator.longueurMinimum(3), VerifierCaracteresValidator.sansEspaces(), Validators.required ]],
-      nomUtilisateur: ['',[VerifierCaracteresValidator.longueurMinimum(3), VerifierCaracteresValidator.sansEspaces(), Validators.required ]]
+      nomUtilisateur: ['',[VerifierCaracteresValidator.longueurMinimum(3), VerifierCaracteresValidator.sansEspaces(), Validators.required ]],
+      noTypeProbleme: ['',Validators.required]
     });   
     
     this.probleme.obtenirTypeProbleme()
     .subscribe(type => this.typeProbleme = type,
-               error => this.errorMessage = <any>error);    
+               error => this.errorMessage = <any>error);
   }
 }
