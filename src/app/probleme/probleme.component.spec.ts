@@ -290,7 +290,7 @@ describe('ProblemeComponent', () => {
   });
   
   //8
-  it ('Zone TELEPHONE est invalide avec 11 chiffres consécutifs quand notifier par messagerie texte', () => {
+  it ('Zone TELEPHONE est valide avec 10 chiffres consécutifs quand notifier par messagerie texte', () => {
     component.appliquerNotifications('ParTelephone');
     let zone = component.problemeForm.get('zoneTelephone');
     zone.setValue('1'.repeat(10));
