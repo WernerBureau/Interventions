@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import { VerifierCaracteresValidator } from '../shared/caracteres-validator';
+import { emailMatcherValidator } from '../shared/emailMatcher-validator';
 import { TypeproblemeService } from './typeprobleme.service';
 import { ITypeProbleme } from './typeprobleme';
 
@@ -23,7 +24,7 @@ export class ProblemeComponent implements OnInit {
       nomUtilisateur: ['',[VerifierCaracteresValidator.longueurMinimum(3), VerifierCaracteresValidator.sansEspaces(), Validators.required ]],
       noTypeProbleme: ['',Validators.required],
       zoneTelephone: [{value: '', disabled: true}],
-      notification:['ChoixNotification'],
+      notification:['NePasMeNotifier'],
       courrielGroup: this.fb.group({
         zoneCourriel: [{value: '', disabled: true}],
         zoneVerifCourriel: [{value: '', disabled: true}]
@@ -35,10 +36,11 @@ export class ProblemeComponent implements OnInit {
                error => this.errorMessage = <any>error);
   }
 
-  appliquerNotifications(typeNotification:string): void{
+  appliquerNotifications(notification:string): void{
     const zoneCourrielControl = this.problemeForm.get('courrielGroup.zoneCourriel');
     const zoneVerifCourrielControl = this.problemeForm.get('courrielGroup.zoneVerifCourriel');
     const zoneTelephoneControl = this.problemeForm.get('zoneTelephone');
+    const courrielGroupControl = this.problemeForm.get('courrielGroup');
     
     zoneCourrielControl.clearValidators();
     zoneCourrielControl.reset();
@@ -52,16 +54,18 @@ export class ProblemeComponent implements OnInit {
     zoneTelephoneControl.reset();
     zoneTelephoneControl.disable();
 
-    if (typeNotification === 'ParCourriel') {
+    if (notification === 'ParCourriel') {
 
-      zoneCourrielControl.setValidators([Validators.required]);
+      zoneCourrielControl.setValidators([Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+")]);
       zoneCourrielControl.enable();
 
-      zoneVerifCourrielControl.setValidators([Validators.required]);
+      zoneVerifCourrielControl.setValidators([Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+")]);
       zoneVerifCourrielControl.enable();
+
+      courrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielConfirmation()])]);
     }
 
-    if (typeNotification === 'ParTelephone') {
+    if (notification === 'ParTelephone') {
 
       zoneTelephoneControl.setValidators([Validators.required]);
       zoneTelephoneControl.enable();
@@ -70,5 +74,6 @@ export class ProblemeComponent implements OnInit {
     zoneCourrielControl.updateValueAndValidity();
     zoneVerifCourrielControl.updateValueAndValidity();
     zoneTelephoneControl.updateValueAndValidity();
+    courrielGroupControl.updateValueAndValidity();
   }
 }

@@ -1,0 +1,18 @@
+import { ValidatorFn, AbstractControl } from "@angular/forms";
+
+export class emailMatcherValidator {
+    static courrielConfirmation(): ValidatorFn{
+        return (c: AbstractControl): {[key: string]: boolean} | null => {
+            let courriel = c.get('zoneCourriel');
+            let confirmation = c.get('zoneVerifCourriel');
+
+            if (!courriel.value || !confirmation.value)
+            return null;
+        
+            if (courriel.value === confirmation.value)
+            return null;
+
+            return { 'courrielConfirmation': true};
+        };
+    }
+}
