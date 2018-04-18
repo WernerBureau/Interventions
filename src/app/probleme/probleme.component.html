@@ -124,6 +124,74 @@
           </div>
         </div>
 
+        <!-- Boutons radio -->
+        <div class="form-group row">
+         <div class="col-md-2"></div>
+          <label for="NotificationId" class="col-md-10 col-form-label">Notifiez-moi pour le statut de ma demande : </label>
+          <div class="col-md-2"></div>
+          <div class="col-md-10">
+            <label class="radio-inline">
+              <input type = "radio"
+                     value = "NePasMeNotifier"
+                     id="notificationId"
+                     formControlName="notification">&nbsp;Ne pas me notifier
+            </label>
+            &nbsp;&nbsp;&nbsp;
+            <label class="radio-inline">
+              <input type = "radio"
+                     value = "ParCourriel"
+                     id="notificationId"
+                     formControlName="notification">&nbsp;Par courriel
+            </label>
+            &nbsp;&nbsp;&nbsp;
+            <label class ="radio-inline">
+               <input type = "radio"
+                      value = "ParTelephone"
+                      id="notificationId"
+                      formControlName="notification">&nbsp;Par message texte
+            </label>
+          </div>
+          </div>
+
+        <!-- Zone de texte telephone -->
+        <div class="form-group row">
+            <label for="telephoneId" class="col-md-2 col-form-label text-right">Téléphone (SMS) : </label>
+            <!--Indiquer le formGroupName pour avoir accès à formControlName-->
+            <div class="col-sm-10">
+              <input class="form-control"
+                    id="telephoneId"
+                    type="text"
+                    placeholder="Entrez 10 chiffres seulement. Par exemple 5141118888"
+                    formControlName="zoneTelephone"/>
+            </div>
+          </div>
+         
+         <!-- Zone de texte courriel -->
+        <div class="form-group row">
+          <label for="courrielId" class="col-md-2 col-form-label text-right">Adresse courriel : </label>
+          <!--Indiquer le formGroupName pour avoir accès à formControlName-->
+          <div class="col-sm-10" formGroupName="courrielGroup">
+            <input class="form-control"
+                  id="courrielId"
+                  type="text"
+                  placeholder="Courriel (obligatoire si notification par courriel)"
+                  formControlName="zoneCourriel"/>
+          </div>
+        </div>
+
+        <!-- Zone de texte confirmer courriel -->
+        <div class="form-group row">
+            <label for="confirmerCourrielId" class="col-md-2 col-form-label text-right">Confirmer courriel : </label>
+            <!--Indiquer le formGroupName pour avoir accès à formControlName-->
+            <div class="col-sm-10" formGroupName="courrielGroup">
+              <input class="form-control"
+                    id="confirmerCourrielId"
+                    type="text"
+                    placeholder="Entrez à nouveau le courriel (obligatoire si notification par courriel)"
+                    formControlName="zoneVerifCourriel"/>
+            </div>
+        </div>
+
       </form>
     </div>
   </div>

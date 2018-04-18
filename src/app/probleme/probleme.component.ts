@@ -34,7 +34,10 @@ export class ProblemeComponent implements OnInit {
     this.probleme.obtenirTypeProbleme()
     .subscribe(type => this.typeProbleme = type,
                error => this.errorMessage = <any>error);
-  }
+
+    this.problemeForm.get('notification').valueChanges
+    .subscribe(value => this.appliquerNotifications(value));
+  } // ngOnInit
 
   appliquerNotifications(notification:string): void{
     const zoneCourrielControl = this.problemeForm.get('courrielGroup.zoneCourriel');
