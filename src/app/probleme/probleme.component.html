@@ -162,7 +162,46 @@
                     id="telephoneId"
                     type="text"
                     placeholder="Entrez 10 chiffres seulement. Par exemple 5141118888"
-                    formControlName="zoneTelephone"/>
+                    formControlName="zoneTelephone"
+                    [ngClass]="{
+                      'is-valid': 
+                            (problemeForm.get('zoneTelephone').touched ||
+                            problemeForm.get('zoneTelephone').dirty) &&
+                            !problemeForm.get('zoneTelephone').errors,
+          
+                      'is-invalid': 
+                            (problemeForm.get('zoneTelephone').touched ||
+                            problemeForm.get('zoneTelephone').dirty) &&
+                            problemeForm.get('zoneTelephone').errors
+                      }"/>
+          
+                      <span class= "form-text" *ngIf="(problemeForm.get('zoneTelephone').touched ||
+                        problemeForm.get('zoneTelephone').dirty) &&
+                        problemeForm.get('zoneTelephone').errors">
+                        <span *ngIf="problemeForm.get('zoneTelephone').errors.minlength">
+                            <small class="text-muted">
+                            Veuillez entrer plus de caractères.
+                            </small>
+                        </span>
+
+                        <span *ngIf="problemeForm.get('zoneTelephone').errors.maxlength">
+                            <small class="text-muted">
+                            Veuillez entrer moins de caractères.
+                            </small>
+                        </span>
+
+                        <span *ngIf="problemeForm.get('zoneTelephone').errors.pattern">
+                            <small class="text-muted">
+                            Merci d'entrer seulement des chiffres.
+                            </small>
+                        </span>
+
+                        <span *ngIf="problemeForm.get('zoneTelephone').errors.required">
+                            <small class="text-muted">
+                            Merci de saisir votre numéro de téléphone.
+                            </small>
+                        </span>
+                      </span>
             </div>
           </div>
          
@@ -175,7 +214,36 @@
                   id="courrielId"
                   type="text"
                   placeholder="Courriel (obligatoire si notification par courriel)"
-                  formControlName="zoneCourriel"/>
+                  formControlName="zoneCourriel"
+                  [ngClass]="{
+                    'is-valid': 
+                          (problemeForm.get('courrielGroup.zoneCourriel').touched ||
+                          problemeForm.get('courrielGroup.zoneCourriel').dirty) &&
+                          !problemeForm.get('courrielGroup.zoneCourriel').errors,
+        
+                    'is-invalid': 
+                          (problemeForm.get('courrielGroup.zoneCourriel').touched ||
+                          problemeForm.get('courrielGroup.zoneCourriel').dirty) &&
+                          problemeForm.get('courrielGroup.zoneCourriel').errors
+                    }"/>
+
+                    <span class= "form-text" *ngIf="(problemeForm.get('courrielGroup.zoneCourriel').touched ||
+                        problemeForm.get('courrielGroup.zoneCourriel').dirty) &&
+                        problemeForm.get('courrielGroup.zoneCourriel').errors">
+
+                        <span *ngIf="problemeForm.get('courrielGroup.zoneCourriel').errors.required">
+                            <small class="text-muted">
+                            Merci d'entrer votre adresse électronique.
+                            </small>
+                        </span>
+
+                        <span *ngIf="problemeForm.get('courrielGroup.zoneCourriel').errors.pattern">
+                            <small class="text-muted">
+                            S.V.P. entrer les informations dans un format valide.
+                            </small>
+                        </span>
+
+                    </span>
           </div>
         </div>
 
@@ -188,7 +256,38 @@
                     id="confirmerCourrielId"
                     type="text"
                     placeholder="Entrez à nouveau le courriel (obligatoire si notification par courriel)"
-                    formControlName="zoneVerifCourriel"/>
+                    formControlName="zoneVerifCourriel"
+                    [ngClass]="{
+                      'is-valid': 
+                      (problemeForm.get('courrielGroup.zoneVerifCourriel').touched ||
+                       problemeForm.get('courrielGroup.zoneVerifCourriel').dirty) &&
+                       problemeForm.get('courrielGroup.zoneVerifCourriel').valid,
+     
+                      'is-invalid': 
+                     (problemeForm.get('courrielGroup.zoneVerifCourriel').touched ||
+                      problemeForm.get('courrielGroup.zoneVerifCourriel').dirty) &&
+                     !problemeForm.get('courrielGroup.zoneVerifCourriel').valid ||
+                      problemeForm.get('courrielGroup').errors?.courrielConfirmation
+                      }"/>
+                      
+                      <span class= "form-text" *ngIf=
+                        "(problemeForm.get('courrielGroup.zoneVerifCourriel').touched ||
+                          problemeForm.get('courrielGroup.zoneVerifCourriel').dirty) &&
+                          problemeForm.get('courrielGroup.zoneVerifCourriel').errors ||
+                          problemeForm.get('courrielGroup').errors">
+
+                          <span *ngIf="problemeForm.get('courrielGroup.zoneVerifCourriel').errors?.required">
+                              <small class="text-muted">
+                              Merci d'entrer votre adresse électronique.
+                              </small>
+                          </span>
+
+                          <span *ngIf="problemeForm.get('courrielGroup').errors?.courrielConfirmation">
+                              <small class="text-muted">
+                              Le courriel de confirmation n'est pas le même que le courriel. Le corriger.
+                              </small>
+                          </span>
+                      </span>
             </div>
         </div>
 

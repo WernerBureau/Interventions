@@ -29,8 +29,8 @@ export class ProblemeComponent implements OnInit {
         zoneCourriel: [{value: '', disabled: true}],
         zoneVerifCourriel: [{value: '', disabled: true}]
       })
-    });   
-    
+    });
+
     this.probleme.obtenirTypeProbleme()
     .subscribe(type => this.typeProbleme = type,
                error => this.errorMessage = <any>error);
