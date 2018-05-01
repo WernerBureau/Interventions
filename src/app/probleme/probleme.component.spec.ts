@@ -36,15 +36,19 @@ describe('ProblemeComponent', () => {
   });
 
   it ('Zone PRÉNOM valide avec 3 caractères', () => {
+    let errors = {};
     let zone = component.problemeForm.controls['prenomUtilisateur'];
     zone.setValue('a'.repeat(3));
-    expect(zone.errors.longueurMinimum).toBeTruthy();
+    errors = zone.errors || {}
+    expect(errors['longueurMinimum']).toBeUndefined();
   });
 
   it ('Zone PRÉNOM valide avec 200 caractères', () => {
+    let errors = {};
     let zone = component.problemeForm.controls['prenomUtilisateur'];
     zone.setValue('a'.repeat(200));
-    expect(zone.errors.longueurMinimum).toBeTruthy();
+    errors = zone.errors || {}
+    expect(errors['longueurMinimum']).toBeUndefined();
   });
 
   it ('Zone PRÉNOM invalide avec aucune valeur', () => {
@@ -59,20 +63,24 @@ describe('ProblemeComponent', () => {
     let errors = {};
     let zone = component.problemeForm.get('prenomUtilisateur');
     zone.setValue('a');
-    errors = zone.errors.longueurMinimum || {};
+    errors = zone.errors || {};
     expect(errors['longueurMinimum']).toBeFalsy();
   });
 
   it ('Zone PRÉNOM invalide avec 50 espaces', () => {
+    let errors = {};
     let zone = component.problemeForm.controls['prenomUtilisateur'];
     zone.setValue(' '.repeat(50));
-    expect(zone.errors.sansEspace).toBeFalsy();
+    errors = zone.errors || {};
+    expect(errors['longueurMinimum']).toBeFalsy();
   });
 
   it ('Zone PRÉNOM invalide avec 2 espaces et 1 caractère', () => {
+    let errors = {};
     let zone = component.problemeForm.controls['prenomUtilisateur'];
     zone.setValue('  a');
-    expect(zone.errors.longueurMinimum).toBeFalsy();
+    errors = zone.errors || {};
+    expect(errors['longueurMinimum']).toBeFalsy();
   });
 
 
@@ -292,8 +300,10 @@ describe('ProblemeComponent', () => {
   //8
   it ('Zone TELEPHONE est valide avec 10 chiffres consécutifs quand notifier par messagerie texte', () => {
     component.appliquerNotifications('ParTelephone');
+    let errors = {};
     let zone = component.problemeForm.get('zoneTelephone');
     zone.setValue('1'.repeat(10));
+    errors = zone.errors || {};
     expect(zone.valid).toBeTruthy();
   });
 });
